@@ -10,13 +10,7 @@ import UIKit
 import AVFoundation
 import SKServicePermissions
 
-open class MicrophonePermissions: NSObject {
-    
-}
-
-// MARK: - ServicePermissions -
-
-extension MicrophonePermissions: ServicePermissions {
+open class MicrophonePermissions: NSObject, ServicePermissions {
     
     public typealias PermissionsState = AVAudioSessionRecordPermission
     
@@ -30,6 +24,6 @@ extension MicrophonePermissions: ServicePermissions {
     public func permissionsState() -> PermissionsState {
         return AVAudioSession.sharedInstance().recordPermission()
     }
-
+    
 }
 
