@@ -12,7 +12,7 @@ import SKServicePermissions
 
 open class MicrophonePermissions: NSObject, ServicePermissions {
     
-    public typealias PermissionsState = AVAudioSessionRecordPermission
+    public typealias PermissionsState = AVAudioSession.RecordPermission
     
     public func requestPermissions(handler: @escaping (PermissionsState) -> Void) {
         AVAudioSession.sharedInstance().requestRecordPermission { [weak self] _ in
