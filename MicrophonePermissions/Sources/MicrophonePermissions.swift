@@ -31,7 +31,7 @@ open class DefaultMicrophonePermissions: MicrophonePermissions {
     }
     
     public func permissionsState() -> PermissionsState {
-        return AVAudioSession.sharedInstance().recordPermission()
+        return AVAudioSession.sharedInstance().recordPermission
     }
     
 }
