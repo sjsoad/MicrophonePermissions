@@ -8,16 +8,23 @@
 
 import UIKit
 import AVFoundation
-import SKServicePermissions
 
-open class MicrophonePermissions: NSObject, ServicePermissions {
+public protocol MicrophonePermissions {
     
-    public typealias PermissionsState = AVAudioSession.RecordPermission
+    typealias PermissionsState = AVAudioSession.RecordPermission
+    
+    func requestPermissions(handler: @escaping (PermissionsState) -> Void)
+    func permissionsState() -> PermissionsState
+}
+
+open class DefaultMicrophonePermissions: MicrophonePermissions {
+    
+    public init() {}
     
     public func requestPermissions(handler: @escaping (PermissionsState) -> Void) {
-        AVAudioSession.sharedInstance().requestRecordPermission { [weak self] _ in
-            guard let `self` = self else { return }
-            DispatchQueue.main.async {
+        AVAudioSession.sharedInstance().requestRecordPermission { _ in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else { return }
                 handler(self.permissionsState())
             }
         }
